@@ -1,0 +1,345 @@
+<header>
+  <span id="logo">Student Profiles</span>
+</header>
+
+<div
+  class="card"
+  style="
+    width: 1350px;
+    height: 550px;
+    border-radius: 5px;
+    margin: 10px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  "
+>
+  <!-- <button class="btn btn-info w-10">ADD STUDENT</button> -->
+  <div class="row">
+    <div class="col-10">
+      <div class="row m-2">
+        <div class="col-3">
+          <label>Classes</label> :-
+          <select [(ngModel)]="studentPro.admn" name="admission" id="admission">
+            <option *ngFor="let ad of admns" [value]="ad.value">
+              {{ ad.label }}
+            </option>
+          </select>
+        </div>
+        <div class="col-3">
+          <label>Gender</label> :-
+          <select name="gender" id="gender" [(ngModel)]="studentPro.gender">
+            <option *ngFor="let ad of gender" [value]="ad.value">
+              {{ ad.label }}
+            </option>
+          </select>
+        </div>
+        <div class="col-3">
+          <label>Roll No.</label> :-
+          <select name="roll" id="roll" [(ngModel)]="studentPro.rolls">
+            <option *ngFor="let ad of rolls" [value]="ad.value">
+              {{ ad.label }}
+            </option>
+          </select>
+        </div>
+        <div class="col-3">
+          <button class="btn btn-primary" (click)="onGetStudents()">
+            Get Students
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-success m-3" (click)="CreateStdnt()">
+        Add Student
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <p-table
+        #dt1
+        [value]="students"
+        sortMode="single"
+        [paginator]="true"
+        [rows]="10"
+        dataKey="admno"
+        [showCurrentPageReport]="true"
+        [loading]="loading"
+        responsiveLayout="scroll"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        tableStyleClass="red-bottom-border"
+        [scrollable]="true"
+        scrollHeight="400px"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="admno" style="background-color: #59d0e6">
+              Admission No <p-sortIcon field="admno"></p-sortIcon>
+            </th>
+            <th pSortableColumn="admnDt" style="background-color: #59d0e6">
+              Admission Dt <p-sortIcon field="admnDt"></p-sortIcon>
+            </th>
+            <th pSortableColumn="admnName" style="background-color: #59d0e6">
+              Student <p-sortIcon field="admnName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="gender" style="background-color: #59d0e6">
+              Gender <p-sortIcon field="gender"></p-sortIcon>
+            </th>
+            <th pSortableColumn="nationality" style="background-color: #59d0e6">
+              Nationality <p-sortIcon field="nationality"></p-sortIcon>
+            </th>
+            <th pSortableColumn="class" style="background-color: #59d0e6">
+              Class <p-sortIcon field="class"></p-sortIcon>
+            </th>
+            <th pSortableColumn="section" style="background-color: #59d0e6">
+              Section <p-sortIcon field="section"></p-sortIcon>
+            </th>
+            <th pSortableColumn="rollNo" style="background-color: #59d0e6">
+              Roll No. <p-sortIcon field="rollNo"></p-sortIcon>
+            </th>
+            <th pSortableColumn="dob" style="background-color: #59d0e6">
+              DOB <p-sortIcon field="dob"></p-sortIcon>
+            </th>
+            <th
+              pSortableColumn="feeStructureType"
+              style="background-color: #59d0e6"
+            >
+              Fee Structure<p-sortIcon field="feeStructureType"></p-sortIcon>
+            </th>
+          </tr>
+          <!-- <tr>
+          <th>
+            <p-columnFilter type="text" field="admno" style="width: 20px;"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="admnDt"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="admnName"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="gender"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="nationality"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="class"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="section"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="rollNo"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="dob"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="feeStructureType"></p-columnFilter>
+          </th>
+        </tr> -->
+        </ng-template>
+        <ng-template pTemplate="body" let-car>
+          <tr>
+            <td>
+              {{ car.admno }}
+              <span
+                *ngIf="car.flg == 'n'"
+                pTooltip="NEW Student Added."
+                class="text-danger"
+                style="font-size: larger"
+                >*</span
+              >
+            </td>
+            <td>{{ car.admnDt }}</td>
+            <td pTooltip="See DetailView" (click)="onStudentClick(car)">
+              <img
+                src="assets/images/profile.png"
+                [class]="'flag flag-' + car.admno"
+                width="30"
+              />
+
+              <span> {{ car.admnName }}</span>
+            </td>
+            <td>{{ car.gender }}</td>
+            <td>{{ car.nationality }}</td>
+            <td>{{ car.class }}</td>
+            <td>{{ car.section }}</td>
+            <td>{{ car.rollNo }}</td>
+            <td>{{ car.dob }}</td>
+            <td>{{ car.feeStructureType }}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+          <tr>
+            <td [attr.colspan]="10">No records found</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft">
+          <button
+            type="button"
+            icon="pi pi-plus"
+            [ngClass]="'p-button-text'"
+          ></button>
+        </ng-template>
+        <ng-template pTemplate="paginatorright">
+          <button
+            type="button"
+            icon="pi pi-cloud"
+            [ngClass]="'p-button-text'"
+          ></button>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
+<p-dialog
+  header="ADD A STUDENT"
+  [(visible)]="display"
+  [style]="{ width: '500px' }"
+>
+  <div class="row">
+    <div class="col-12">
+      <p-tabView>
+        <p-tabPanel header="Student Details">
+          <input
+            type="text"
+            placeholder="Admission No..."
+            [(ngModel)]="addStudent.admno"
+            class="form-control m-2"
+          />
+          <input
+            type="text"
+            placeholder="Admission Dt..."
+            [(ngModel)]="addStudent.admnDt"
+            class="form-control m-2"
+          />
+          <input
+            type="text"
+            placeholder="Name..."
+            class="form-control m-2"
+            [(ngModel)]="addStudent.admnName"
+          />
+
+          <select
+            name="addStudent.gender"
+            id="addStudent.gender"
+            class="form-control"
+            [(ngModel)]="addStudent.gender"
+          >
+            <option *ngFor="let se of gen" value="{{ se.value }}">
+              {{ se.label }}
+            </option>
+          </select>
+          <select
+            name="addStudent.ntn"
+            id="addStudent.ntn"
+            [(ngModel)]="addStudent.nationality"
+            class="form-control m-2"
+          >
+            <option *ngFor="let se of ntn" value="{{ se.value }}">
+              {{ se.label }}
+            </option>
+          </select>
+          <select
+            name="addStudent.class"
+            id="addStudent.class"
+            class="form-control m-2"
+            [(ngModel)]="addStudent.class"
+          >
+            <option *ngFor="let se of class" value="{{ se.value }}">
+              {{ se.label }}
+            </option>
+          </select>
+          <select
+            name="addStudent.section"
+            id="addStudent.section"
+            class="form-control m-2"
+            [(ngModel)]="addStudent.section"
+          >
+            <option *ngFor="let se of section" value="{{ se.value }}">
+              {{ se.label }}
+            </option>
+          </select>
+
+          <input
+            type="text"
+            placeholder="Roll No..."
+            class="form-control m-2"
+            [(ngModel)]="addStudent.rollNo"
+          />
+          <input
+            type="text"
+            placeholder="DOB..."
+            class="form-control m-2"
+            [(ngModel)]="addStudent.dob"
+          />
+          <select
+            name="addStudent.feeStructureType"
+            id="addStudent.feeStructureType"
+            [(ngModel)]="addStudent.feeStructureType"
+            class="form-control m-2"
+          >
+            <option *ngFor="let se of feeStructureType" value="{{ se.value }}">
+              {{ se.label }}
+            </option>
+          </select>
+        </p-tabPanel>
+        <p-tabPanel header="Guardian Details">
+          <input
+            type="text"
+            placeholder="Name..."
+            class="form-control m-2"
+            [(ngModel)]="addStudent.gnm"
+          />
+          <select
+            name="addStudent.gender"
+            id="addStudent.gender"
+            class="form-control m-2"
+            [(ngModel)]="addStudent.gg"
+          >
+            <option *ngFor="let se of gen" value="{{ se.value }}">
+              {{ se.label }}
+            </option>
+          </select>
+          <select
+            name="addStudent.ntn"
+            id="addStudent.ntn"
+            [(ngModel)]="addStudent.gn"
+            class="form-control m-2"
+          >
+            <option *ngFor="let se of ntn" value="{{ se.value }}">
+              {{ se.label }}
+            </option>
+          </select>
+          <input
+            type="text"
+            placeholder="Class..."
+            class="form-control m-2"
+            [(ngModel)]="addStudent.gp"
+          />
+        </p-tabPanel>
+      </p-tabView>
+
+      <div class="row">
+        <div class="col-6">
+          <button class="btn btn-primary btn-block m-2" (click)="onadd()">
+            Save
+          </button>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-primary btn-block m-2" (click)="onclear()">
+            CLEAR
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-dialog>
+
+<p-confirmDialog
+  header="Confirmation"
+  icon="pi pi-exclamation-triangle"
+></p-confirmDialog>

@@ -1,0 +1,267 @@
+<header>
+  <span id="logo">Fee Collection</span>
+</header>
+<div
+  class="card"
+  style="
+    width: 1350px;
+    height: 550px;
+    border-radius: 5px;
+    margin: 10px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  "
+>
+  <!-- <div class="py-3">
+    <p-button
+      [icon]="activeState[0] ? 'pi pi-minus' : 'pi pi-plus'"
+      (click)="toggle(0)"
+      styleClass="p-button-text ml-2"
+      label="FEE / Due Collections with Students"
+    ></p-button>
+  </div> -->
+
+  <p-accordion>
+    <p-accordionTab header="FEE COLLECTION" [(selected)]="activeState[0]">
+      <div class="row" style="height: 400px">
+        <div class="col-4">
+          <div>
+            <p-autoComplete
+              id="search-form"
+              [(ngModel)]="text"
+              [suggestions]="filteredCountries"
+              (completeMethod)="search($event)"
+              placeholder="Search For Student..."
+              field="name"
+            >
+              <ng-template let-group pTemplate="item">
+                <div
+                  class="card flex align-items-center p-4"
+                  style="
+                    width: 800px;
+                    height: 700px;
+                    overflow-y: hidden;
+                    background-color: rgba(216, 210, 210, 0.87);
+                  "
+                  (click)="onModuleClick(group)"
+                >
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-4">
+                        <div
+                          class="text-black mb-1"
+                          style="margin-left: 25px; font-size: larger"
+                        >
+                          {{ group.admnName }}
+                        </div>
+                        <img
+                          src="assets/images/profile.png"
+                          width="150px"
+                          height="100px"
+                        />
+                        <div>
+                          Fee For :--
+                          <select name="Fee" id="" [(ngModel)]="sem">
+                            <option
+                              *ngFor="let se of semOp"
+                              value="{{ se.value }}"
+                            >
+                              {{ se.label }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-8">
+                        <div class="row">
+                          <div class="col-9">
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="enter due"
+                              pTooltip="Total Due..."
+                              [(ngModel)]="duE"
+                            />
+                          </div>
+                          <div class="col-3">
+                            <button
+                              class="btn btn-primary"
+                              [disabled]="duE == 0"
+                              (click)="pay(group)"
+                            >
+                              Collect Fee
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <table>
+                    <tr>
+                      <th>Fee Heads</th>
+                      <th>Amts</th>
+                    </tr>
+                    <tr>
+                      <td>Recievable</td>
+                      <td>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="enter due"
+                          [disabled]="true"
+                          [(ngModel)]="group.fee[0]['net']"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Net Recieved</td>
+                      <td>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="enter due"
+                          [disabled]="true"
+                          [(ngModel)]="group.fee[0]['rec']"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Concession</td>
+                      <td>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="enter due"
+                          [disabled]="true"
+                          [(ngModel)]="group.fee[0]['concession']"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>AdvanceFee</td>
+                      <td>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="enter due"
+                          [disabled]="true"
+                          [(ngModel)]="group.fee[0]['adv']"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>As on Due</td>
+                      <td>
+                        {{ duemt(group) }}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </ng-template>
+            </p-autoComplete>
+          </div>
+          <!-- <div class="row">
+            <div class="col-12">
+              ADMISSION NO:
+              <input
+                type="text"
+                placeholder="Admission No..."
+                [(ngModel)]="addStudent.admno"
+                class="form-control m-2"
+              />
+              <input
+                type="text"
+                placeholder="Admission Dt..."
+                [(ngModel)]="addStudent.admnDt"
+                class="form-control m-2"
+              />
+              <input
+                type="text"
+                placeholder="Name..."
+                class="form-control m-2"
+                [(ngModel)]="addStudent.admnName"
+              />
+              <input
+                type="text"
+                placeholder="Gender..."
+                class="form-control m-2"
+                [(ngModel)]="addStudent.gender"
+              />
+              <input
+                type="text"
+                placeholder="Nationality..."
+                [(ngModel)]="addStudent.nationality"
+                class="form-control m-2"
+              />
+              <input
+                type="text"
+                placeholder="Class..."
+                class="form-control m-2"
+                [(ngModel)]="addStudent.class"
+              />
+              <input
+                type="text"
+                placeholder="Section..."
+                class="form-control m-2"
+                [(ngModel)]="addStudent.section"
+              />
+              <input
+                type="text"
+                placeholder="Roll No..."
+                class="form-control m-2"
+                [(ngModel)]="addStudent.rollNo"
+              />
+              <input
+                type="text"
+                placeholder="DOB..."
+                class="form-control m-2"
+                [(ngModel)]="addStudent.dob"
+              />
+              <input
+                type="text"
+                placeholder="FEE STRUCTURE..."
+                [(ngModel)]="addStudent.feeStructureType"
+                class="form-control m-2"
+              />
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+</div>
+
+<p-dialog
+  header="Fee Collection Reciept"
+  [(visible)]="display"
+  [style]="{ width: '500px' }"
+>
+  <div class="row">
+    <div class="col-12">
+      <table>
+        <tr>
+          <th>Recievable Dt</th>
+          <th>Fee Type</th>
+          <th>Schedule</th>
+          <th>Fee For</th>
+          <th>Due Amount</th>
+          <th>Mark Amount</th>
+        </tr>
+        <tr *ngFor="let d of det; let dIn = index">
+          <td>{{ d.recDt }}</td>
+          <td>{{ d.feeType }}</td>
+          <td>{{ d.schedule }}</td>
+          <td pTooltip="Semester Paid">{{ d.pdFor }}</td>
+          <td pTooltip="Due Paid">{{ d.duemnt }}</td>
+          <td pTooltip="Advance Amt">
+            {{ d.advnc }}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</p-dialog>
+
+<p-confirmDialog
+  header="Confirmation"
+  icon="pi pi-exclamation-triangle"
+></p-confirmDialog>

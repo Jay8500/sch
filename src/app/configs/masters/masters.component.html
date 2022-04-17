@@ -1,0 +1,290 @@
+<header>
+  <span id="logo">Configurions Masters</span>
+</header>
+<div
+  class="card"
+  style="
+    width: 1350px;
+    height: 550px;
+    border-radius: 5px;
+    margin: 10px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  "
+>
+  <!-- <div class="py-3">
+    <p-button
+      [icon]="activeState[0] ? 'pi pi-minus' : 'pi pi-plus'"
+      (click)="toggle(0)"
+      styleClass="p-button-text"
+      label="Add Batch"
+    ></p-button>
+    <p-button
+      [icon]="activeState[1] ? 'pi pi-minus' : 'pi pi-plus'"
+      (click)="toggle(1)"
+      styleClass="p-button-text ml-2"
+      label="Add Course"
+    ></p-button>
+    <p-button
+      [icon]="activeState[2] ? 'pi pi-minus' : 'pi pi-plus'"
+      (click)="toggle(2)"
+      styleClass="p-button-text ml-2"
+      label="Add Semester"
+    ></p-button>
+    <p-button
+      [icon]="activeState[3] ? 'pi pi-minus' : 'pi pi-plus'"
+      (click)="toggle(3)"
+      styleClass="p-button-text ml-2"
+      label="Mapping Batch to Course, Course to Semesters"
+    ></p-button>
+  </div> -->
+
+  <p-accordion>
+    <p-accordionTab header="Batch" [(selected)]="activeState[0]">
+      <div class="row">
+        <div class="col-4">
+          <div class="class m-2">
+            <input
+              type="text"
+              name="b"
+              id="b"
+              class="form-control"
+              placeholder="enter batch"
+            />
+          </div>
+          <div class="class m-2">
+            <input
+              type="text"
+              name="d"
+              id="d"
+              class="form-control"
+              [(ngModel)]="dt"
+            />
+          </div>
+          <div class="class m-2">
+            <input type="checkbox" name="b" id="b" /> Active
+          </div>
+          <button class="btn btn-primary btn-block">SAVE</button>
+        </div>
+        <div class="col-8">
+          <table>
+            <tr>
+              <th>Batch</th>
+              <th>Year</th>
+              <th>Active</th>
+              <th>Remove</th>
+            </tr>
+            <tr>
+              <td>CSE</td>
+              <td>2020-2021</td>
+              <td>Active</td>
+              <td><button class="btn btn-danger">Delete</button></td>
+            </tr>
+            <tr>
+              <td>MECH</td>
+              <td>2020-2021</td>
+              <td>Active</td>
+              <td><button class="btn btn-danger">Delete</button></td>
+            </tr>
+            <tr>
+              <td>CIVIL</td>
+              <td>2020-2021</td>
+              <td>Active</td>
+              <td><button class="btn btn-danger">Delete</button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Course" [(selected)]="activeState[1]">
+      <div class="row">
+        <div class="col-4">
+          <div class="class m-2">
+            <input
+              type="text"
+              name="b"
+              id="b"
+              class="form-control"
+              placeholder="enter Course"
+            />
+          </div>
+          <div class="class m-2">
+            <input
+              type="text"
+              name="d"
+              id="d"
+              class="form-control"
+              placeholder="enter Course Yr"
+              [(ngModel)]="dt"
+            />
+          </div>
+          <div class="class m-2">
+            <input type="checkbox" name="b" id="b" /> Active
+          </div>
+          <button class="btn btn-primary btn-block">SAVE</button>
+        </div>
+        <div class="col-8">
+          <table>
+            <tr>
+              <th>Course</th>
+              <th>Year</th>
+              <th>Active</th>
+              <th>Remove</th>
+            </tr>
+            <tr>
+              <td>CSE</td>
+              <td>2020-2021</td>
+              <td>Active</td>
+              <td><button class="btn btn-danger">Delete</button></td>
+            </tr>
+            <tr>
+              <td>MECH</td>
+              <td>2020-2021</td>
+              <td>Active</td>
+              <td><button class="btn btn-danger">Delete</button></td>
+            </tr>
+            <tr>
+              <td>CIVIL</td>
+              <td>2020-2021</td>
+              <td>Active</td>
+              <td><button class="btn btn-danger">Delete</button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Semester" [(selected)]="activeState[2]">
+      <div class="row">
+        <div class="col-4">
+          <div class="class m-2">
+            <input
+              type="text"
+              name="b"
+              id="b"
+              class="form-control"
+              placeholder="enter Semester"
+            />
+          </div>
+          <div class="class m-2">
+            <input
+              type="text"
+              name="d"
+              id="d"
+              class="form-control"
+              [(ngModel)]="dt"
+              placeholder="enter Semester Yr"
+            />
+          </div>
+          <div class="class m-2">
+            <input type="checkbox" name="b" id="b" /> Active
+          </div>
+          <button class="btn btn-primary btn-block">SAVE</button>
+        </div>
+        <div class="col-8">
+          <table>
+            <tr>
+              <th>Semester</th>
+              <th>Year</th>
+              <th>Active</th>
+              <th>Remove</th>
+            </tr>
+            <tr>
+              <td>1-1</td>
+              <td>2020-2021</td>
+              <td>Active</td>
+              <td><button class="btn btn-danger">Delete</button></td>
+            </tr>
+            <tr>
+              <td>1-2</td>
+              <td>2020-2021</td>
+              <td>Active</td>
+              <td><button class="btn btn-danger">Delete</button></td>
+            </tr>
+            <tr>
+              <td>1-3</td>
+              <td>2020-2021</td>
+              <td>Active</td>
+              <td><button class="btn btn-danger">Delete</button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Masters Mapping" [(selected)]="activeState[3]">
+      <div class="row">
+        <div class="col-4">
+          <!-- <div class="col-3"> -->
+          <div>
+            <label>Batch</label> :-
+            <select name="admission" id="admission" class="form-control">
+              <option>CSE 2020</option>
+            </select>
+          </div>
+          <!-- </div> -->
+          <!-- <div class="col-3"> -->
+          <div>
+            <label>Course</label> :-
+            <select name="admission" id="admission" class="form-control">
+              <option>CSE</option>
+            </select>
+          </div>
+          <div>
+            <!-- </div> -->
+            <!-- <div class="col-3"> -->
+            <label>Semester</label> :-
+            <select name="admission" id="admission" style="width: 100px">
+              <option>1-1</option>
+            </select>
+          </div>
+          <!-- </div> -->
+
+          <button class="btn btn-primary btn-block">Mapp</button>
+        </div>
+        <div class="col-8">
+          <table>
+            <tr>
+              <th>Batch</th>
+              <th>Course</th>
+              <th>Semester</th>
+              <th>Active</th>
+              <th>Remove Mapp</th>
+            </tr>
+            <tr>
+              <td>CSE 2020-2024</td>
+              <td>CSE</td>
+              <td>1-1</td>
+              <td>Active</td>
+              <td><button class="btn btn-danger">Delete</button></td>
+            </tr>
+            <tr>
+              <td>CIVIL 2020-2024</td>
+              <td>CIVIL</td>
+              <td>1-1</td>
+              <td>Active</td>
+              <td><button class="btn btn-danger">Delete</button></td>
+            </tr>
+            <tr>
+              <td>MECH 2020-2024</td>
+              <td>MECH</td>
+              <td>1-1</td>
+              <td>Active</td>
+              <td><button class="btn btn-danger">Delete</button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="CUSTOM FEE HEADS" [(selected)]="activeState[4]">
+      <div class="row">
+        <div class="col-12">
+          <input type="text" placeholder="INSTAllMENTS MAPPING...." value="1 INSTAllMENT" class="m-2" />
+          <input type="text"  placeholder="FEE HEADS...." class="m-2" />
+          <input type="text"  placeholder="SEMESTER APPLY...." class="m-2" />
+          <input type="checkbox"  class="m-2" value="true" /> ACTIVE
+
+          <button class="btn btn-primary">MAP FEE HEADS</button>
+        </div>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+</div>

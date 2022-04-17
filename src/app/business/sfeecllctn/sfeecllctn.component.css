@@ -1,0 +1,35 @@
+header {
+    position: relative;
+    height: 50px;
+    background-color: #006778;
+    padding-top: 10px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+  }
+  #logo {
+    float: left;
+    margin-bottom: 10px;
+    font-weight: bold;
+    margin-top: 0px;
+    margin-left: 10px;
+    text-align: left;
+    color: #ecf0f1;
+    display: inline;
+  }
+
+  
+
+  table {
+    margin-left: 300px;
+  }
+  th, td {
+    border: 1px solid black;
+    /* border-radius: 20px; */
+  }
+  td {
+    padding: 20px;
+  }
+  td{
+    height: 50px;
+  }
